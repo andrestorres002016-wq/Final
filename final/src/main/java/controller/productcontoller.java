@@ -1,4 +1,4 @@
-package com.ejemplo.inventario.controller;
+package controller;
 
 
 import com.ejemplo.inventario.dto.ProductRequestDTO;
