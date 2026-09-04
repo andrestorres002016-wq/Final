@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Builder
 @Getter
 @Setter
@@ -20,7 +22,7 @@ public class ProductModel {
     private String name;
     private String description;
     private Double price;
-    private Double cantidad;
+    private int cantidad;
     private String categoria;
-    private Double fechadecreacion;
+    private LocalDateTime fechadecreacion;
 }
