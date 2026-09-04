@@ -1,6 +1,5 @@
 package controller;
 
-
 import com.ejemplo.inventario.dto.ProductRequestDTO;
 import com.ejemplo.inventario.dto.ProductResponseDTO;
 import com.ejemplo.inventario.service.ProductService;
@@ -18,11 +17,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // RF1: Crear producto - POST /api/products
     @PostMapping
     public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody ProductRequestDTO requestDTO) {
-        ProductResponseDTO createdProduct = productService.createProduct(requestDTO);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+        return new ResponseEntity<>(productService.createProduct(requestDTO), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -35,26 +32,22 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
-    // RF1: Actualizar producto - PUT /api/products/{id}
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id, @RequestBody ProductRequestDTO requestDTO) {
         return ResponseEntity.ok(productService.updateProduct(id, requestDTO));
     }
 
-    // RF1: Eliminar producto - DELETE /api/products/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
 
-    // RF2: Buscar por categoría - GET /api/products/category/{category}
     @GetMapping("/category/{category}")
     public ResponseEntity<List<ProductResponseDTO>> getProductsByCategory(@PathVariable String category) {
         return ResponseEntity.ok(productService.getProductsByCategory(category));
     }
 
-    // RF2: Buscar por nombre - GET /api/products/search?name=mouse
     @GetMapping("/search")
     public ResponseEntity<List<ProductResponseDTO>> searchProductsByName(@RequestParam String name) {
         return ResponseEntity.ok(productService.searchProductsByName(name));
