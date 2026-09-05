@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/products")
@@ -42,16 +44,18 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Producto eliminado correctamente");
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/category/{category}")
-    public ResponseEntity<List<ProductResponseDTO>> getProductsByCategory(@PathVariable String category) {
-        return ResponseEntity.ok(productService.getProductsByCategory(category));
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<List<ProductResponseDTO>> getProductsByCategory(@PathVariable String categoria) {
+        return ResponseEntity.ok(productService.getProductsByCategory(categoria));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ProductResponseDTO>> getProductsByName(@RequestParam String name) {
-        return ResponseEntity.ok(productService.getProductsByName(name));
+    public ResponseEntity<List<ProductResponseDTO>> getProductsByName(@RequestParam String nombre) {
+        return ResponseEntity.ok(productService.getProductsByName(nombre));
     }
 }
